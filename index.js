@@ -36,6 +36,11 @@ app.get('/books/:id', (req, res) => {
 });
   
 // Create a new book
+app.post('/', (req, res) => {
+    res.status(200).json({status:true,code:200,msg:'Hello World'});
+});
+
+// Create a new book
 app.post('/books', (req, res) => {
     const data = readData();
     const newBook = {

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const https = require('https');
+// const https = require('https');
 const app = express();
 const PORT = 3000;
 
@@ -81,14 +81,17 @@ app.delete('/books/:id', (req, res) => {
 });
   
 // Start the server with HTTPS
-const server = https.createServer(
-    {
-        key: fs.readFileSync('certificates/server.key'),
-        cert: fs.readFileSync('certificates/server.crt'),
-    },
-    app
-);
-  
-server.listen(PORT, () => {
-    console.log(`Server running on https://localhost:${PORT}`);
+// const server = https.createServer(
+//     {
+//         key: fs.readFileSync('certificates/server.key'),
+//         cert: fs.readFileSync('certificates/server.crt'),
+//     },
+//     app
+// );
+// server.listen(PORT, () => {
+//     console.log(`Server running on https://localhost:${PORT}`);
+// });
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });

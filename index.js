@@ -17,11 +17,15 @@ const readData = () => {
 const writeData = (data) => {
     fs.writeFileSync('./json/book.json', JSON.stringify(data, null, 2));
 };
-  
+
+app.get('/', (req, res) => {
+    res.status(200).send({code:200, status: true, msg: "Hello"});
+});
+
 // Get all books
 app.get('/books', (req, res) => {
     const data = readData();
-    res.status(200).json({status:true,code:200,data:data.books});
+    res.status(200).send({status:true,code:200,data:data.books});
 });
   
 // Get a book by ID
@@ -29,15 +33,15 @@ app.get('/books/:id', (req, res) => {
     const data = readData();
     const book = data.books.find((b) => b.id === parseInt(req.params.id));
     if (book) {
-        res.status(200).json({status:true,code:200,data:book});
+        res.status(200).send({status:true,code:200,data:book});
     } else {
-        res.status(404).json({ status:false, code:404, message: 'Book not found' });
+        res.status(404).send({ status:false, code:404, message: 'Book not found' });
     }
 });
   
 // Create a new book
 app.post('/', (req, res) => {
-    res.status(200).json({status:true,code:200,msg:'Hello World'});
+    res.status(200).send({status:true,code:200,msg:'Hello World'});
 });
 
 // Create a new book
@@ -50,7 +54,7 @@ app.post('/books', (req, res) => {
     };
     data.books.push(newBook);
     writeData(data);
-    res.status(200).json({status:true,code:200,data:newBook});
+    res.status(200).send({status:true,code:200,data:newBook});
 });
   
 // Update a book by ID
@@ -61,9 +65,9 @@ app.put('/books/:id', (req, res) => {
         book.title = req.body.title;
         book.author = req.body.author;
         writeData(data);
-        res.status(200).json({status:true,code:200,data:book});
+        res.status(200).send({status:true,code:200,data:book});
     } else {
-        res.status(404).json({ message: 'Book not found' });
+        res.status(404).send({ message: 'Book not found' });
     }
 });
   
@@ -76,7 +80,7 @@ app.delete('/books/:id', (req, res) => {
         writeData(data);
         res.sendStatus(204);
     } else {
-        res.status(404).json({ message: 'Book not found' });
+        res.status(404).send({ message: 'Book not found' });
     }
 });
   

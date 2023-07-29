@@ -1,11 +1,12 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const fs = require('fs');
 // const https = require('https');
 const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 
 // Read data from the JSON file
 const readData = () => {
@@ -101,4 +102,4 @@ app.listen(PORT, () => {
 });
 
 // Export the Express API
-module.exports = app;
+// module.exports = app;
